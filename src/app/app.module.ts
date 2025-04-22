@@ -16,6 +16,7 @@ import { SubirP66Service } from './services/subir-p66.service';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import {provideStorage, getStorage} from '@angular/fire/storage';
+import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {provideStorage, getStorage} from '@angular/fire/storage';
     LoginComponent,
     FotosComponent,
     CargaComponent,
-    NavbarComponent
+    NavbarComponent,
+    NgDropFilesDirective
   ],
   imports: [
     BrowserModule,

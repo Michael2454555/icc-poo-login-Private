@@ -9,6 +9,7 @@ import { SubirP66Service } from '../../services/subir-p66.service';
 })
 export class CargaComponent {
   archivos:FileItem[]=[];
+  estaSobreElemento=false;
 
 
 
