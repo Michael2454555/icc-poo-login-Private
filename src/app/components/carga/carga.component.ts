@@ -16,8 +16,10 @@ export class CargaComponent {
   constructor(private _subirImagenes:SubirP66Service){}
   subirImagenes(){
     
-    this._subirImagenes.subirImagenesFirebase(this.archivos);
+    this._subirImagenes.subirImagenesFirestore(this.archivos);
     console.log("Subir imagenes...");
   }
-
+  limpiarArchivos(){
+    this.archivos=[];
+  }
 }

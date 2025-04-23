@@ -1,44 +1,52 @@
 <app-navbar></app-navbar>
 
-<div class="row" style="magic: 10px;">
-    <div class="col-md-4">
-        <h3>Seleccionar archivos</h3>
-        <div appNgDropFiles (mouseSobre)="estaSobreElemento=$event "
-                            [archivos]="archivos"
-                            [ngClass] ="{`file-over`: estaSobreElemento}"class="well drop-zone">
-            <h4>Arrastrar aqui los archivos</h4>
-            <img src="drop-images.png">
-        </div>
+<div class="row" style="margin: 10px;">
+  <div class="col-md-4">
+    <h3>Seleccionar archivos</h3>
+    <div appNgDropFiles
+         (mouseSobre)="estaSobreElemento = $event"
+         [archivos]="archivos"
+         [ngClass]="{'file-over': estaSobreElemento}"
+         class="well drop-zone">
+      <h4>Arrastrar aqui los archivos</h4>
+      <img src="drop-images.png">
     </div>
-    <div class="col-md-8">
-        <h4>Cargar achivos</h4>
-        <button class="btn btn-outline-success" (click) = "subirImagenes()"
-                [disabled]="archivos.length===0">Subir a Firestore</button>
-        <button class="btn btn-outline-danger">Limpiar</button>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Nombre Archivo</th>
-                    <th>Tamaño</th>
-                    <th>Progreso</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let archivo of archivos">
-                    <td>{{archivo.nombreArchivo}}</td>
-                    <td>{{archivo.archivo.size/1024/1024}} MB</td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar"
-                                role="progressbar"
-                                [ngStyle]="{`width`:archivo.progreso+`%`}"
-                            ></div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+  </div>
 
+  <div class="col-md-8">
+    <h4>Cargar archivos</h4>
+    <button class="btn btn-outline-success"
+            (click)="subirImagenes()"
+            [disabled]="archivos.length === 0">
+      Subir a Firestore
+    </button>
+    <button class="btn btn-outline-danger" (click)="limpiarArchivos()">
+      Limpiar
+    </button>
 
-    </div>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nombre Archivo</th>
+          <th>Tamaño</th>
+          <th>Progreso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let archivo of archivos">
+          <td>{{ archivo.nombreArchivo }}</td>
+          <td>{{ (archivo.archivo.size / 1024 / 1024) | number:'.2-2' }} MB</td>
+          <td  >
+            <div class="progress">
+              <div class="progress-bar "
+                    [ngClass]="{'bg-success':archivo.progress>=100}"
+                   role="progressbar"
+                   [ngStyle]="{'width': archivo.progress + '%'}">
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

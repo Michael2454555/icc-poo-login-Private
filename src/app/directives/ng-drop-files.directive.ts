@@ -1,4 +1,4 @@
-import { Directive,EventEmitter, Input, Output } from '@angular/core';
+import { Directive,EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { FileItem } from '../models/file-item';
 
 @Directive({
@@ -45,7 +45,7 @@ export class NgDropFilesDirective {
     event.stopPropagation();
   }
   private _esImagen(tipoArchivo:String){
-    return (tipoArchivo===underfined||tipoArchivo===``)?false:tipoArchivo.scartsWith(`ìmage`);
+    return (tipoArchivo === undefined || tipoArchivo === '') ? false : tipoArchivo.startsWith('image');
   }
   private _archivoYaUtilizado(nombreArchivo:string):boolean{
     for (const archivo of this.archivos){
@@ -72,7 +72,7 @@ export class NgDropFilesDirective {
     console.log(`archivoLista: `,archivoLista);
     for(const propiedad in Object.getOwnPropertyNames(archivoLista)){
       const archivoTemporal=archivoLista[propiedad];
-      if(!this._archivoOkparaUpload(archivoTemporal)){
+      if(this._archivoOkparaUpload(archivoTemporal)){
         const nuevoFile=new FileItem(archivoTemporal);
         this.archivos.push(nuevoFile);
       }
